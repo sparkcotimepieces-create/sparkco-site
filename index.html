@@ -74,24 +74,26 @@
                  linear-gradient(180deg, rgba(255,255,255,.02), transparent 20%)
     }
     .hero-card{padding:24px}
-    .hero-media{display:grid;grid-template-columns:1.08fr .92fr;gap:16px;min-height:640px}
-    .hero-main,.hero-side .box{
-      position:relative;overflow:hidden;border-radius:26px;background:#0b0b0b;border:1px solid rgba(217,178,76,.14);
-      box-shadow:0 10px 30px rgba(0,0,0,.25);transform:translateY(0) scale(1);transition:transform .6s ease, box-shadow .6s ease, border-color .6s ease
+    .hero-images{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
     }
-    .hero-main:hover,.hero-side .box:hover,.gallery-card:hover,.watch-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 40px rgba(0,0,0,.35);border-color:rgba(217,178,76,.28)}
-    .hero-side{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:16px}
-    .hero-side .box.tall{grid-row:span 2}
-    .hero-main img{width:100%;height:100%;object-fit:contain;background:#0b0b0b;padding:10px;transform:scale(1);transition:transform 8s ease}
-    .hero-side img,.gallery-card img,.watch-card img{width:100%;height:100%;object-fit:cover;transform:scale(1);transition:transform 8s ease}
-    .hero-main:hover img,.hero-side .box:hover img,.gallery-card:hover img,.watch-card:hover img{transform:scale(1.05)}
-    .logo-badge{
-      position:absolute;top:16px;left:16px;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;
-      border:1px solid rgba(217,178,76,.22);background:rgba(6,6,6,.68);backdrop-filter:blur(8px);color:var(--gold-light);
-      font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 10px 24px rgba(0,0,0,.25)
+    .hero-image{
+      position:relative;
+      overflow:hidden;
+      height:280px;
+      border-radius:26px;
+      background:#0b0b0b;
+      border:1px solid rgba(217,178,76,.14);
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      transform:translateY(0) scale(1);
+      transition:transform .6s ease, box-shadow .6s ease, border-color .6s ease;
     }
-    .logo-badge img{width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid rgba(217,178,76,.16)}
-    .logo-badge span{display:block;line-height:1.25}
+    .hero-image:hover,.gallery-card:hover,.watch-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 40px rgba(0,0,0,.35);border-color:rgba(217,178,76,.28)}
+    .hero-image img,.gallery-card img,.watch-card img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 8s ease}
+    .hero-image:hover img,.gallery-card:hover img,.watch-card:hover img{transform:scale(1.05)}
+    .hero-image.rolex img{object-fit:contain;background:#0b0b0b;padding:12px}
     section{padding:28px 0}
     .panel{padding:36px}
     .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:28px}
@@ -161,9 +163,6 @@
     @keyframes slideUp{to{opacity:1;transform:translateY(0)}}
     @media (max-width:1080px){
       .hero-grid,.gallery,.contact-grid,.grid-2,.watch-grid{grid-template-columns:1fr}
-      .hero-media{grid-template-columns:1fr;min-height:auto}
-      .hero-main{min-height:420px}
-      .hero-side{grid-template-columns:1fr 1fr;grid-template-rows:auto}
       .gallery-card,.watch-card .photo{min-height:320px;height:320px}
       .stats{grid-template-columns:1fr}
     }
@@ -171,11 +170,10 @@
       .wrap{padding:0 16px}
       .nav-links{display:none}
       .panel,.hero-card,.success-card{padding:22px}
-      .form-grid{grid-template-columns:1fr}
+      .form-grid,.hero-images{grid-template-columns:1fr}
       .btn,.btn-outline,.pill{width:100%}
       .hero{padding-top:36px}
-      .hero-main{min-height:300px}
-      .logo-badge{padding:8px 12px}
+      .hero-image{height:240px}
     }
   </style>
 </head>
@@ -222,37 +220,11 @@
         </div>
 
         <div class="hero-card reveal delay-1">
-          <div class="hero-media">
-            <div class="hero-main">
-              <div class="logo-badge">
-                <img src="logo.jpeg" alt="">
-                <span>Spark &amp; Co.<br>Timepieces</span>
-              </div>
-              <img src="rolex.jpg" alt="Luxury Rolex watch">
-            </div>
-            <div class="hero-side">
-              <div class="box tall">
-                <div class="logo-badge">
-                  <img src="logo.jpeg" alt="">
-                  <span>Spark &amp; Co.<br>Timepieces</span>
-                </div>
-                <img src="hublot.jpg" alt="Luxury Hublot watch">
-              </div>
-              <div class="box">
-                <div class="logo-badge">
-                  <img src="logo.jpeg" alt="">
-                  <span>Spark &amp; Co.<br>Timepieces</span>
-                </div>
-                <img src="ap.jpg" alt="Luxury Audemars Piguet watch">
-              </div>
-              <div class="box">
-                <div class="logo-badge">
-                  <img src="logo.jpeg" alt="">
-                  <span>Spark &amp; Co.<br>Timepieces</span>
-                </div>
-                <img src="omega-top-right.jpg" alt="Luxury Omega watch">
-              </div>
-            </div>
+          <div class="hero-images">
+            <div class="hero-image rolex"><img src="rolex.jpg" alt="Luxury Rolex watch"></div>
+            <div class="hero-image"><img src="ap.jpg" alt="Luxury Audemars Piguet watch"></div>
+            <div class="hero-image"><img src="hublot.jpg" alt="Luxury Hublot watch"></div>
+            <div class="hero-image"><img src="omega-top-right.jpg" alt="Luxury Omega watch"></div>
           </div>
         </div>
       </div>
@@ -342,7 +314,7 @@
               <div class="meta">
                 Ref: 647.NX.1137.RX<br>
                 Size: 42 mm<br>
-                Includes: Card & box<br>
+                Includes: Card &amp; box<br>
                 Price: $11,800
               </div>
               <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
