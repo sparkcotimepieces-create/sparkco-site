@@ -1,63 +1,975 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spark & Co. Timepieces</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spark &amp; Co. Timepieces</title>
+  <meta name="description" content="Sell your luxury watch with confidence. Spark & Co. Timepieces delivers a premium, private, and professional selling experience for luxury timepieces.">
+  <style>
+    :root{
+      --bg:#050505;
+      --bg-soft:#0b0b0b;
+      --panel:rgba(255,255,255,.045);
+      --text:#f5f0e6;
+      --muted:#cfc1a8;
+      --gold:#d9b24c;
+      --gold-light:#f1d98d;
+      --line:rgba(217,178,76,.22);
+      --shadow:0 30px 80px rgba(0,0,0,.55);
+      --radius:30px;
+    }
 
-<style>
-body{margin:0;background:#050505;color:#fff;font-family:Arial;}
-.wrap{max-width:1200px;margin:auto;padding:40px;}
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
-h1{font-size:60px;font-family:Georgia;}
-p{color:#ccc;font-size:20px;}
-.box{background:#111;border-radius:20px;padding:20px;}
-.hero-images{display:grid;grid-template-columns:1fr 1fr;gap:15px;}
-.hero-main{grid-column:span 2;height:400px;background:#000;border-radius:20px;display:flex;align-items:center;justify-content:center;}
-.hero-main img{
-width:100%;
-height:100%;
-object-fit:contain;
-background:#000;
-padding:10px;
-}
-.hero-small{height:200px;border-radius:20px;overflow:hidden;}
-.hero-small img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-</style>
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(217,178,76,.10), transparent 24%),
+        radial-gradient(circle at top right, rgba(217,178,76,.05), transparent 18%),
+        radial-gradient(circle at bottom left, rgba(217,178,76,.05), transparent 18%),
+        linear-gradient(180deg,#060606 0%,#040404 100%);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(rgba(255,255,255,.02), transparent 20%),
+        radial-gradient(circle at 30% 10%, rgba(255,255,255,.03), transparent 14%);
+      mix-blend-mode:screen;
+      opacity:.45;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(16px);
+      background:rgba(4,4,4,.74);
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+
+    .nav{
+      min-height:84px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .brand img{
+      width:58px;height:58px;border-radius:50%;
+      object-fit:cover;
+      border:1px solid var(--line);
+      box-shadow:0 0 0 7px rgba(217,178,76,.05);
+      background:#000;
+    }
+
+    .brand-text{
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:18px;
+      line-height:1.1;
+      letter-spacing:.06em;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .eyebrow{
+      color:var(--gold-light);
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:18px;
+    }
+
+    h1,h2,h3{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      letter-spacing:-.03em;
+    }
+
+    h1{
+      font-size:clamp(48px,7.4vw,96px);
+      line-height:.95;
+      max-width:760px;
+    }
+
+    h2{
+      font-size:clamp(34px,5vw,64px);
+      line-height:.98;
+    }
+
+    p{
+      margin:0;
+      color:var(--muted);
+      font-size:20px;
+      line-height:1.8;
+    }
+
+    .hero{
+      padding:68px 0 30px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:34px;
+      align-items:center;
+    }
+
+    .lead{
+      margin-top:22px;
+      font-size:clamp(20px,2.2vw,29px);
+      line-height:1.55;
+      max-width:720px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-top:32px;
+    }
+
+    .hero-note{
+      margin-top:20px;
+      color:var(--gold-light);
+      font-size:15px;
+      font-weight:700;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:28px;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:22px;
+      background:rgba(255,255,255,.02);
+      transform:translateY(0);
+      transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .stat:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+      border-color:rgba(217,178,76,.35);
+    }
+
+    .stat b{
+      display:block;
+      color:var(--gold-light);
+      font-size:34px;
+      margin-bottom:8px;
+      font-family:Georgia, "Times New Roman", serif;
+    }
+
+    .stat span{
+      color:var(--muted);
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .btn,.btn-outline,.pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:56px;
+      padding:0 28px;
+      border-radius:999px;
+      font-size:15px;
+      font-weight:700;
+      transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .btn{
+      color:#111;
+      background:linear-gradient(135deg,var(--gold),var(--gold-light));
+      box-shadow:0 14px 28px rgba(217,178,76,.18);
+      border:none;
+      cursor:pointer;
+    }
+
+    .btn:hover,.btn-outline:hover,.pill:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn-outline,.pill{
+      border:1px solid var(--line);
+      color:var(--gold-light);
+      background:rgba(255,255,255,.02);
+    }
+
+    .btn-outline:hover,.pill:hover{
+      background:rgba(255,255,255,.05);
+    }
+
+    .panel,.hero-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:36px;
+      border:1px solid rgba(255,255,255,.06);
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+    }
+
+    .panel::before,.hero-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(135deg, rgba(217,178,76,.08), transparent 34%, transparent 70%, rgba(217,178,76,.04)),
+        linear-gradient(180deg, rgba(255,255,255,.02), transparent 20%);
+    }
+
+    .hero-card{
+      padding:24px;
+    }
+
+    .hero-media{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:16px;
+      min-height:640px;
+    }
+
+    .hero-main,.hero-side .box{
+      position:relative;
+      overflow:hidden;
+      border-radius:26px;
+      background:#0b0b0b;
+      border:1px solid rgba(217,178,76,.14);
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      transform:translateY(0) scale(1);
+      transition:transform .6s ease, box-shadow .6s ease, border-color .6s ease;
+    }
+
+    .hero-main:hover,.hero-side .box:hover,.gallery-card:hover{
+      transform:translateY(-6px) scale(1.01);
+      box-shadow:0 20px 40px rgba(0,0,0,.35);
+      border-color:rgba(217,178,76,.28);
+    }
+
+    .hero-side{
+      display:grid;
+      grid-template-rows:1fr 1fr;
+      gap:16px;
+    }
+
+    .hero-main img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      background:#0b0b0b;
+      padding:10px;
+      transform:scale(1);
+      transition:transform 8s ease;
+    }
+
+    .hero-side img,.gallery-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transform:scale(1);
+      transition:transform 8s ease;
+    }
+
+    .hero-main:hover img,.hero-side .box:hover img,.gallery-card:hover img{
+      transform:scale(1.05);
+    }
+
+    .logo-badge{
+      position:absolute;
+      top:16px;
+      left:16px;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(217,178,76,.22);
+      background:rgba(6,6,6,.68);
+      backdrop-filter:blur(8px);
+      color:var(--gold-light);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      box-shadow:0 10px 24px rgba(0,0,0,.25);
+    }
+
+    .logo-badge img{
+      width:30px;
+      height:30px;
+      border-radius:50%;
+      object-fit:cover;
+      border:1px solid rgba(217,178,76,.16);
+    }
+
+    .logo-badge span{
+      display:block;
+      line-height:1.25;
+    }
+
+    section{
+      padding:28px 0;
+    }
+
+    .panel{
+      padding:36px;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:28px;
+    }
+
+    .gallery-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:26px;
+      min-height:360px;
+      border:1px solid rgba(217,178,76,.14);
+      background:#0b0b0b;
+      transition:transform .55s ease, box-shadow .55s ease, border-color .55s ease;
+    }
+
+    .gallery-card.tall{
+      min-height:520px;
+    }
+
+    .gallery-caption{
+      position:absolute;
+      left:22px;
+      right:22px;
+      bottom:18px;
+      z-index:2;
+    }
+
+    .gallery-caption strong{
+      display:block;
+      margin-bottom:8px;
+      color:var(--gold-light);
+      font-size:13px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+    }
+
+    .gallery-caption span{
+      color:#f0e7d7;
+      font-size:16px;
+      line-height:1.55;
+    }
+
+    .contact-grid,.grid-2{
+      display:grid;
+      gap:28px;
+    }
+
+    .contact-grid{
+      grid-template-columns:1fr .96fr;
+      align-items:start;
+    }
+
+    .grid-2{
+      grid-template-columns:1fr 1fr;
+    }
+
+    .contact-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:26px;
+    }
+
+    form{
+      display:grid;
+      gap:16px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    input,select,textarea{
+      width:100%;
+      padding:18px 20px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:#0a0a0a;
+      color:var(--text);
+      font-size:17px;
+      outline:none;
+      transition:border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+
+    input::placeholder,textarea::placeholder,select{
+      color:#b9ad97;
+    }
+
+    textarea{
+      min-height:180px;
+      resize:vertical;
+    }
+
+    input:focus,select:focus,textarea:focus{
+      border-color:rgba(217,178,76,.55);
+      box-shadow:0 0 0 4px rgba(217,178,76,.08);
+      transform:translateY(-1px);
+    }
+
+    .submit-note{
+      color:#b8aa90;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .list{
+      list-style:none;
+      margin:24px 0 0;
+      padding:0;
+      display:grid;
+      gap:16px;
+    }
+
+    .list li{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.6;
+    }
+
+    .dot,.num{
+      width:38px;
+      height:38px;
+      flex:0 0 auto;
+      border-radius:50%;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--line);
+      background:rgba(217,178,76,.06);
+      color:var(--gold-light);
+      font-weight:700;
+    }
+
+    footer{
+      margin-top:30px;
+      padding:42px 0 60px;
+      border-top:1px solid rgba(255,255,255,.05);
+      color:#b8ab93;
+    }
+
+    .footer-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      font-size:15px;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .success-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      z-index:100;
+      background:rgba(0,0,0,.72);
+      backdrop-filter:blur(12px);
+    }
+
+    .success-overlay.show{
+      display:flex;
+      animation:fadeIn .25s ease;
+    }
+
+    .success-card{
+      width:min(760px,100%);
+      padding:42px;
+      border-radius:32px;
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.06);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      transform:translateY(10px);
+      opacity:0;
+      animation:slideUp .32s ease forwards;
+    }
+
+    .success-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg, rgba(217,178,76,.10), transparent 34%, transparent 70%, rgba(217,178,76,.05));
+    }
+
+    .success-icon{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,var(--gold),var(--gold-light));
+      color:#111;
+      font-size:34px;
+      font-weight:700;
+      margin-bottom:18px;
+      position:relative;
+      z-index:1;
+    }
+
+    .success-card h3{
+      position:relative;
+      z-index:1;
+      font-size:clamp(34px,5vw,62px);
+      line-height:.96;
+    }
+
+    .success-card p{
+      position:relative;
+      z-index:1;
+      margin-top:16px;
+    }
+
+    .success-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:28px;
+      position:relative;
+      z-index:1;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .delay-1{transition-delay:.08s}
+    .delay-2{transition-delay:.16s}
+    .delay-3{transition-delay:.24s}
+
+    @keyframes fadeIn{
+      from{opacity:0}
+      to{opacity:1}
+    }
+
+    @keyframes slideUp{
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    @media (max-width:1080px){
+      .hero-grid,.gallery,.contact-grid,.grid-2{
+        grid-template-columns:1fr;
+      }
+
+      .hero-media{
+        grid-template-columns:1fr;
+        min-height:auto;
+      }
+
+      .hero-main{
+        min-height:420px;
+      }
+
+      .hero-side{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:none;
+      }
+
+      .gallery-card,.gallery-card.tall{
+        min-height:360px;
+      }
+
+      .stats{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:720px){
+      .wrap{padding:0 16px}
+      .nav-links{display:none}
+      .panel,.hero-card,.success-card{padding:22px}
+      .form-grid,.hero-side{grid-template-columns:1fr}
+      .btn,.btn-outline,.pill{width:100%}
+      .hero{padding-top:36px}
+      .hero-main{min-height:300px}
+      .brand-text{font-size:16px}
+      .success-icon{width:62px;height:62px;font-size:28px}
+      .logo-badge{padding:8px 12px}
+    }
+  </style>
 </head>
-
 <body>
-<div class="wrap">
-<div class="hero">
+  <div class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#top">
+        <img src="logo.jpeg" alt="Spark &amp; Co. Timepieces logo">
+        <div class="brand-text">SPARK &amp; CO.<br>TIMEPIECES</div>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#collection">Collection</a>
+        <a href="#benefits">Why Sell to Us</a>
+        <a href="#offer">Request Offer</a>
+        <a class="btn-outline" href="sms:7038890333">Text Us</a>
+      </div>
+    </div>
+  </div>
 
-<div>
-<h1>Sell Your Luxury Watch</h1>
-<p>Premium experience for Rolex, AP, and Hublot owners.</p>
-</div>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Private luxury watch buyer</div>
+          <h1>Sell Your Luxury Watch Through a Truly Premium Experience</h1>
+          <p class="lead">
+            Spark &amp; Co. Timepieces acquires exceptional watches from private sellers through a discreet,
+            professional, and design-forward process built for confidence.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#offer">Get My Private Offer</a>
+            <a class="btn-outline" href="sms:7038890333">Text Us Directly</a>
+          </div>
+          <div class="hero-note">Competitive offers. Private communication. Typical response within 10–15 minutes.</div>
 
-<div class="box">
-<div class="hero-images">
+          <div class="stats">
+            <div class="stat reveal delay-1"><b>Private</b><span>Discreet seller experience</span></div>
+            <div class="stat reveal delay-2"><b>Fast</b><span>Responsive evaluation process</span></div>
+            <div class="stat reveal delay-3"><b>Direct</b><span>No hidden fees or middlemen</span></div>
+          </div>
+        </div>
 
-<div class="hero-main">
-<img src="rolex.jpg">
-</div>
+        <div class="hero-card reveal delay-1">
+          <div class="hero-media">
+            <div class="hero-main">
+              <div class="logo-badge">
+                <img src="logo.jpeg" alt="">
+                <span>Spark &amp; Co.<br>Timepieces</span>
+              </div>
+              <img src="rolex.jpg" alt="Luxury Rolex watch">
+            </div>
+            <div class="hero-side">
+              <div class="box">
+                <div class="logo-badge">
+                  <img src="logo.jpeg" alt="">
+                  <span>Spark &amp; Co.<br>Timepieces</span>
+                </div>
+                <img src="hublot.jpg" alt="Luxury Hublot watch">
+              </div>
+              <div class="box">
+                <div class="logo-badge">
+                  <img src="logo.jpeg" alt="">
+                  <span>Spark &amp; Co.<br>Timepieces</span>
+                </div>
+                <img src="ap.jpg" alt="Luxury Audemars Piguet watch">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div class="hero-small">
-<img src="hublot.jpg">
-</div>
+    <section id="collection">
+      <div class="wrap panel reveal">
+        <div class="eyebrow">Curated visual identity</div>
+        <h2>A premium presentation for premium timepieces</h2>
+        <p>
+          First impressions matter. A luxury acquisition brand should feel elevated,
+          polished, and trustworthy from the moment a seller lands on the page.
+        </p>
 
-<div class="hero-small">
-<img src="ap.jpg">
-</div>
+        <div class="gallery">
+          <div class="gallery-card tall reveal delay-1">
+            <img src="rolex.jpg" alt="Rolex style luxury watch">
+            <div class="gallery-caption">
+              <strong>Rolex-Inspired Presence</strong>
+              <span>A rich, high-end visual tone built for premium sellers.</span>
+            </div>
+          </div>
 
-</div>
-</div>
+          <div class="gallery-card reveal delay-2">
+            <img src="hublot.jpg" alt="Hublot style luxury watch">
+            <div class="gallery-caption">
+              <strong>Hublot-Inspired Boldness</strong>
+              <span>Modern, confident imagery that feels powerful and premium.</span>
+            </div>
+          </div>
 
-</div>
-</div>
+          <div class="gallery-card reveal delay-3">
+            <img src="ap.jpg" alt="AP style luxury watch">
+            <div class="gallery-caption">
+              <strong>AP-Inspired Detail</strong>
+              <span>Sharp, mechanical, and unmistakably upscale.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap contact-grid">
+        <div class="panel reveal">
+          <div class="eyebrow">Direct contact</div>
+          <h2>Prefer a direct conversation?</h2>
+          <p>
+            Reach out by text or email for a faster, more personal response. Every inquiry is handled
+            with discretion and a focus on making the selling process smooth from first contact.
+          </p>
+          <div class="contact-actions">
+            <a class="btn" href="sms:7038890333">Text Us</a>
+            <a class="pill" href="mailto:sparkcotimepieces@gmail.com">sparkcotimepieces@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="panel reveal delay-1" id="offer">
+          <div class="eyebrow">Request your private offer</div>
+          <form id="offerForm" action="https://formspree.io/f/mpqooaga" method="POST">
+            <input type="hidden" name="_subject" value="New watch inquiry from Spark &amp; Co. website">
+            <input type="hidden" name="_captcha" value="false">
+
+            <div class="form-grid">
+              <input type="text" name="full_name" placeholder="Full name" required>
+              <input type="email" name="email" placeholder="Email address" required>
+            </div>
+
+            <div class="form-grid">
+              <input type="text" name="phone" placeholder="Phone number">
+              <input type="text" name="brand_model" placeholder="Brand / Model">
+            </div>
+
+            <div class="form-grid">
+              <input type="text" name="reference_number" placeholder="Reference number">
+              <select name="condition" required>
+                <option value="" selected disabled>Condition</option>
+                <option>Excellent</option>
+                <option>Very Good</option>
+                <option>Good</option>
+                <option>Fair</option>
+              </select>
+            </div>
+
+            <textarea name="details" placeholder="Tell us about your watch, included accessories, condition, and asking price."></textarea>
+
+            <button class="btn" type="submit">Get My Private Offer</button>
+
+            <div class="submit-note">
+              By submitting, you agree to be contacted by Spark &amp; Co. Timepieces regarding your inquiry.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap grid-2">
+        <div class="panel reveal">
+          <div class="eyebrow">About Spark &amp; Co. Timepieces</div>
+          <h2>A trusted buyer for luxury timepieces</h2>
+          <p>
+            We work with private sellers who value professionalism, presentation, and a fair market-based approach.
+            Our process is built to feel straightforward, elevated, and secure.
+          </p>
+        </div>
+
+        <div class="panel reveal delay-1">
+          <div class="eyebrow">Why clients choose us</div>
+          <ul class="list">
+            <li><span class="dot">✓</span><span>Private communication from first inquiry to final payment</span></li>
+            <li><span class="dot">✓</span><span>Clear offers based on brand, condition, accessories, and market demand</span></li>
+            <li><span class="dot">✓</span><span>A polished experience designed for individual sellers and curated collections</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="wrap panel reveal">
+        <div class="eyebrow">Why sell to us</div>
+        <h2>Luxury watch owners expect a higher standard</h2>
+        <p>
+          Selling a premium watch should feel as refined as acquiring one. We focus on speed, trust,
+          and presentation so the process feels confident at every step.
+        </p>
+        <ul class="list">
+          <li><span class="num">01</span><span><strong>Competitive market-based offers</strong><br>We evaluate demand, condition, and overall presentation to deliver strong, fair offers.</span></li>
+          <li><span class="num">02</span><span><strong>Fast and efficient process</strong><br>No unnecessary delays. We aim to review submissions promptly and communicate clearly.</span></li>
+          <li><span class="num">03</span><span><strong>Private and discreet transactions</strong><br>Your information and transaction details are handled with professionalism.</span></li>
+          <li><span class="num">04</span><span><strong>No hidden fees</strong><br>What we offer is what you receive.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap grid-2">
+        <div class="panel reveal">
+          <div class="eyebrow">A better way to sell</div>
+          <h2>An experience built around confidence</h2>
+          <p>
+            From the first message to the final offer, our goal is to make every interaction feel refined,
+            direct, and trustworthy.
+          </p>
+        </div>
+
+        <div class="panel reveal delay-1">
+          <div class="eyebrow">Brands we consider</div>
+          <ul class="list">
+            <li><span class="dot">✓</span><span>Rolex</span></li>
+            <li><span class="dot">✓</span><span>Omega</span></li>
+            <li><span class="dot">✓</span><span>Cartier</span></li>
+            <li><span class="dot">✓</span><span>Audemars Piguet</span></li>
+            <li><span class="dot">✓</span><span>Hublot</span></li>
+            <li><span class="dot">✓</span><span>And other premium timepieces</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap panel reveal">
+        <div class="eyebrow">Ready to sell?</div>
+        <h2>Request your private offer today</h2>
+        <p>
+          Submit your watch details for a prompt review, or contact us directly for a faster conversation.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#offer">Get My Private Offer</a>
+          <a class="btn-outline" href="sms:7038890333">Text Us Directly</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div>© <span id="year"></span> Spark &amp; Co. Timepieces. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="mailto:sparkcotimepieces@gmail.com">sparkcotimepieces@gmail.com</a>
+        <a href="sms:7038890333">703-889-0333</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-card">
+      <div class="success-icon">✓</div>
+      <div class="eyebrow">Submission received</div>
+      <h3>Thank you for your request.</h3>
+      <p>
+        Your watch inquiry has been submitted successfully. We will review the details and reach out shortly.
+      </p>
+      <div class="success-actions">
+        <a class="btn" href="sms:7038890333">Text Us</a>
+        <button class="btn-outline" type="button" id="closeSuccess">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const form = document.getElementById('offerForm');
+    const overlay = document.getElementById('successOverlay');
+    const closeBtn = document.getElementById('closeSuccess');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.reset();
+          overlay.classList.add('show');
+        } else {
+          alert('There was a problem submitting your request. Please try again or text us directly.');
+        }
+      } catch (err) {
+        alert('There was a problem submitting your request. Please try again or text us directly.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+
+    closeBtn.addEventListener('click', function() {
+      overlay.classList.remove('show');
+    });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) overlay.classList.remove('show');
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
