@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You | Spark &amp; Co. Timepieces</title>
+  <style>
+    :root{
+      --bg:#060606;
+      --panel:#111111;
+      --text:#f4efe5;
+      --muted:#cfc4ae;
+      --gold:#d7af45;
+      --gold2:#f1d77e;
+      --line:rgba(215,175,69,.24);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:
+        radial-gradient(circle at top left, rgba(215,175,69,.08), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(215,175,69,.06), transparent 22%),
+        linear-gradient(180deg, #070707 0%, #040404 100%);
+      color:var(--text);
+      font-family:Georgia, "Times New Roman", serif;
+    }
+    .card{
+      width:min(760px,100%);
+      border-radius:32px;
+      padding:44px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(215,175,69,.08), transparent 35%, transparent 70%, rgba(215,175,69,.04));
+      pointer-events:none;
+    }
+    .eyebrow{
+      color:var(--gold2);
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font:700 14px/1.4 Arial,sans-serif;
+      margin-bottom:18px;
+      position:relative;
+      z-index:1;
+    }
+    h1{
+      margin:0 0 18px;
+      font-size:clamp(38px,6vw,72px);
+      line-height:.96;
+      letter-spacing:-.04em;
+      position:relative;
+      z-index:1;
+    }
+    p{
+      margin:0;
+      color:var(--muted);
+      font:400 20px/1.8 Arial,sans-serif;
+      position:relative;
+      z-index:1;
+    }
+    .actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:28px;
+      position:relative;
+      z-index:1;
+    }
+    .btn,.btn-outline{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:58px;
+      padding:0 28px;
+      border-radius:999px;
+      font:700 16px/1 Arial,sans-serif;
+      text-decoration:none;
+      transition:.2s ease;
+    }
+    .btn{
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
+      color:#111;
+    }
+    .btn-outline{
+      border:1px solid var(--line);
+      color:var(--gold2);
+      background:rgba(255,255,255,.02);
+    }
+    .btn:hover,.btn-outline:hover{transform:translateY(-1px)}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">Spark &amp; Co. Timepieces</div>
+    <h1>Thank you for your request.</h1>
+    <p>
+      Your submission has been received successfully. We will review your watch details
+      and reach out shortly.
+    </p>
+    <div class="actions">
+      <a class="btn" href="index.html">Return to Website</a>
+      <a class="btn-outline" href="sms:7038890333">Text Us</a>
+    </div>
+  </div>
+</body>
+</html>
