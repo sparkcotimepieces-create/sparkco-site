@@ -264,10 +264,80 @@ footer{
   </div>
 </div>
 
+
 <main>
-<section class="page-hero"><div class="wrap page-intro"><div class="eyebrow">Consignment</div><h1>Consign your watch with confidence</h1><p>For sellers who want a premium presentation, stronger market exposure, and the potential to maximize value through a curated sales process.</p></div></section>
-<section><div class="wrap hero-media" style="margin-bottom:22px"><div class="panel"><div class="eyebrow">Why consignment</div><h2>A premium alternative to an outright sale</h2><p>Consignment can be a strong option if you prefer broader buyer exposure and a higher-end presentation while your watch remains under your ownership until sold.</p><ul class="list"><li><span class="dot">✓</span><span>Luxury presentation and direct buyer inquiries</span></li><li><span class="dot">✓</span><span>Potential for stronger net result than an immediate offer</span></li><li><span class="dot">✓</span><span>Support from listing through final sale</span></li></ul><div class="card-actions"><a class="btn" href="contact.html">Ask About Consignment</a></div></div><div class="hero-visual"><div class="image-card"><img src="hublot.jpg" alt="Hublot watch"></div><div class="image-card"><img src="ap.jpg" alt="AP watch"></div></div></div></section>
+<section class="page-hero">
+  <div class="wrap page-intro">
+    <div class="eyebrow">Consignment</div>
+    <h1>Consign your watch with confidence</h1>
+    <p>For sellers who want premium presentation, broader exposure, and a stronger luxury sales experience.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap hero-media" style="margin-bottom:22px">
+    <div class="panel">
+      <div class="eyebrow">Why consignment</div>
+      <h2>A premium alternative to an outright sale</h2>
+      <p>Consignment can be a strong option if you prefer broader buyer exposure and a higher-end presentation while your watch remains under your ownership until sold.</p>
+      <ul class="list">
+        <li><span class="dot">✓</span><span>Luxury presentation and direct buyer inquiries</span></li>
+        <li><span class="dot">✓</span><span>Potential for stronger net result than an immediate offer</span></li>
+        <li><span class="dot">✓</span><span>Support from listing through final sale</span></li>
+      </ul>
+    </div>
+    <div class="hero-visual">
+      <div class="image-card"><img src="hublot.jpg" alt="Hublot watch"></div>
+      <div class="image-card"><img src="ap.jpg" alt="AP watch"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="panel">
+      <div class="eyebrow">Consignment request</div>
+      <form id="offerForm" action="https://formspree.io/f/mpqooaga" method="POST">
+        <input type="hidden" name="_subject" value="New consignment request from Spark &amp; Co. website">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="request_type" value="Consignment Request">
+
+        <div class="form-grid">
+          <input type="text" name="full_name" placeholder="Full name" required>
+          <input type="email" name="email" placeholder="Email address" required>
+        </div>
+
+        <div class="form-grid">
+          <input type="text" name="phone" placeholder="Phone number">
+          <input type="text" name="brand_model" placeholder="Brand / Model" required>
+        </div>
+
+        <div class="form-grid">
+          <input type="text" name="reference_number" placeholder="Reference number">
+          <select name="condition" required>
+            <option value="" selected disabled>Condition</option>
+            <option>Excellent</option>
+            <option>Very Good</option>
+            <option>Good</option>
+            <option>Fair</option>
+          </select>
+        </div>
+
+        <div class="form-grid">
+          <input type="text" name="box_papers" placeholder="Box / Papers / Accessories">
+          <input type="text" name="asking_price" placeholder="Expected consignment price">
+        </div>
+
+        <textarea name="details" placeholder="Tell us about your watch, ownership history, condition, service history, included accessories, and anything else important."></textarea>
+
+        <button class="btn" type="submit">Submit Consignment Request</button>
+        <div class="submit-note">By submitting, you agree to be contacted by Spark &amp; Co. Timepieces regarding your consignment inquiry.</div>
+      </form>
+    </div>
+  </div>
+</section>
 </main>
+
 
 <footer>
   <div class="wrap footer-row">
@@ -291,6 +361,56 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="success-icon">✓</div>
+    <div class="eyebrow">Submission received</div>
+    <h3>Thank you for your request.</h3>
+    <p>Your submission has been received successfully. We will review the details and reach out shortly.</p>
+    <div class="card-actions">
+      <a class="btn" href="sms:7038890333">Text Us</a>
+      <button class="btn-outline" type="button" id="closeSuccess">Close</button>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('offerForm');
+  const overlay = document.getElementById('successOverlay');
+  const closeBtn = document.getElementById('closeSuccess');
+  if (form && overlay && closeBtn) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          form.reset();
+          overlay.classList.add('show');
+        } else {
+          alert('There was a problem submitting your request.');
+        }
+      } catch (err) {
+        alert('There was a problem submitting your request.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+    closeBtn.addEventListener('click', () => overlay.classList.remove('show'));
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('show'); });
+  }
+});
+</script>
 
 </body>
 </html>

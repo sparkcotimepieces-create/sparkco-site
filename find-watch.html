@@ -264,10 +264,80 @@ footer{
   </div>
 </div>
 
+
 <main>
-<section class="page-hero"><div class="wrap page-intro"><div class="eyebrow">Find a Watch</div><h1>Tell us what watch you want</h1><p>If the right piece is not currently in inventory, we can help source it through our network of collectors, dealers, and trusted contacts.</p></div></section>
-<section><div class="wrap hero-media" style="margin-bottom:22px"><div class="hero-visual"><div class="image-card"><img src="omega-top-right.jpg" alt="Omega watch"></div><div class="image-card"><img src="rolex.jpg" alt="Rolex watch"></div></div><div class="panel"><div class="eyebrow">How it works</div><h2>A more direct sourcing experience</h2><p>Share the brand, reference, budget, and condition preferences you have in mind. We will review your request and let you know what may be possible to source.</p><ul class="list"><li><span class="dot">✓</span><span>Reference-specific search support</span></li><li><span class="dot">✓</span><span>Premium brand focus</span></li><li><span class="dot">✓</span><span>Clear communication throughout the process</span></li></ul><div class="card-actions"><a class="btn" href="contact.html">Request a Watch</a></div></div></div></section>
+<section class="page-hero">
+  <div class="wrap page-intro">
+    <div class="eyebrow">Find a Watch</div>
+    <h1>Tell us what watch you want</h1>
+    <p>If the right piece is not currently in inventory, we can help source it through our network of collectors, dealers, and trusted contacts.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap hero-media" style="margin-bottom:22px">
+    <div class="hero-visual">
+      <div class="image-card"><img src="omega-top-right.jpg" alt="Omega watch"></div>
+      <div class="image-card"><img src="rolex.jpg" alt="Rolex watch"></div>
+    </div>
+    <div class="panel">
+      <div class="eyebrow">How it works</div>
+      <h2>A more direct sourcing experience</h2>
+      <p>Share the brand, reference, budget, and condition preferences you have in mind. We will review your request and let you know what may be possible to source.</p>
+      <ul class="list">
+        <li><span class="dot">✓</span><span>Reference-specific search support</span></li>
+        <li><span class="dot">✓</span><span>Premium brand focus</span></li>
+        <li><span class="dot">✓</span><span>Clear communication throughout the process</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="panel">
+      <div class="eyebrow">Watch request</div>
+      <form id="offerForm" action="https://formspree.io/f/mpqooaga" method="POST">
+        <input type="hidden" name="_subject" value="New find-a-watch request from Spark &amp; Co. website">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="request_type" value="Find a Watch Request">
+
+        <div class="form-grid">
+          <input type="text" name="full_name" placeholder="Full name" required>
+          <input type="email" name="email" placeholder="Email address" required>
+        </div>
+
+        <div class="form-grid">
+          <input type="text" name="phone" placeholder="Phone number">
+          <input type="text" name="brand_model" placeholder="Brand / Model wanted" required>
+        </div>
+
+        <div class="form-grid">
+          <input type="text" name="reference_number" placeholder="Reference number (if known)">
+          <input type="text" name="budget" placeholder="Budget range">
+        </div>
+
+        <div class="form-grid">
+          <select name="condition_preference" required>
+            <option value="" selected disabled>Condition preference</option>
+            <option>New / Unworn</option>
+            <option>Excellent</option>
+            <option>Very Good</option>
+            <option>Open to options</option>
+          </select>
+          <input type="text" name="box_papers" placeholder="Box / Papers preference">
+        </div>
+
+        <textarea name="details" placeholder="Tell us the exact watch you want, preferred size, dial, metal, year, condition, box/papers, and any must-have details."></textarea>
+
+        <button class="btn" type="submit">Submit Watch Request</button>
+        <div class="submit-note">By submitting, you agree to be contacted by Spark &amp; Co. Timepieces regarding your sourcing inquiry.</div>
+      </form>
+    </div>
+  </div>
+</section>
 </main>
+
 
 <footer>
   <div class="wrap footer-row">
@@ -291,6 +361,56 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="success-icon">✓</div>
+    <div class="eyebrow">Submission received</div>
+    <h3>Thank you for your request.</h3>
+    <p>Your submission has been received successfully. We will review the details and reach out shortly.</p>
+    <div class="card-actions">
+      <a class="btn" href="sms:7038890333">Text Us</a>
+      <button class="btn-outline" type="button" id="closeSuccess">Close</button>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('offerForm');
+  const overlay = document.getElementById('successOverlay');
+  const closeBtn = document.getElementById('closeSuccess');
+  if (form && overlay && closeBtn) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          form.reset();
+          overlay.classList.add('show');
+        } else {
+          alert('There was a problem submitting your request.');
+        }
+      } catch (err) {
+        alert('There was a problem submitting your request.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+    closeBtn.addEventListener('click', () => overlay.classList.remove('show'));
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('show'); });
+  }
+});
+</script>
 
 </body>
 </html>
