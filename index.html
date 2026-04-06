@@ -66,6 +66,34 @@ img{display:block;max-width:100%}
   color:var(--muted); font-size:13px;
 }
 .nav-links a:hover{color:var(--text)}
+.menu-toggle{
+  display:none;
+  width:44px; height:44px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+  color:var(--gold-light);
+  align-items:center; justify-content:center;
+  cursor:pointer;
+  font-size:18px;
+}
+.mobile-menu{
+  display:none;
+  border-top:1px solid rgba(255,255,255,.04);
+  background:rgba(5,5,5,.96);
+}
+.mobile-menu-inner{
+  display:grid;
+  gap:10px;
+  padding:16px 28px 20px;
+}
+.mobile-menu a{
+  color:var(--muted);
+  font-size:14px;
+  padding:10px 0;
+}
+.mobile-menu a:hover{color:var(--text)}
+.mobile-menu.open{display:block}
 .btn,.btn-outline,.pill{
   display:inline-flex; align-items:center; justify-content:center;
   min-height:44px; padding:0 18px; border-radius:999px;
@@ -235,6 +263,7 @@ footer{
 @media (max-width:720px){
   .wrap{padding:0 16px}
   .nav-links{display:none}
+  .menu-toggle{display:inline-flex}
   .panel{padding:22px}
   .form-grid{grid-template-columns:1fr}
   .btn,.btn-outline,.pill{width:100%}
@@ -261,7 +290,22 @@ footer{
       <a href="contact.html">Contact</a>
       <a class="btn-outline" href="sms:7038890333">Text Us</a>
     </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
   </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <a href="about.html">About</a>
+      <a href="inventory.html">Inventory</a>
+      <a href="sold.html">Sold Watches</a>
+      <a href="consignment.html">Consignment</a>
+      <a href="find-watch.html">Find a Watch</a>
+      <a href="services.html">Services</a>
+      <a href="sell.html">Sell Yours</a>
+      <a href="contact.html">Contact</a>
+      <a href="sms:7038890333">Text Us</a>
+    </div>
+  </div>
+</div>
 </div>
 
 <main>
@@ -336,6 +380,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('open');
+      const expanded = menu.classList.contains('open');
+      toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      toggle.textContent = expanded ? '✕' : '☰';
+    });
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = '☰';
+      });
+    });
+  }
+});
+</script>
 
 </body>
 </html>
