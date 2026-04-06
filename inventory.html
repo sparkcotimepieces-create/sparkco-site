@@ -269,6 +269,32 @@ footer{
   .btn,.btn-outline,.pill{width:100%}
   .hero{padding-top:38px}
 }
+
+.product-gallery{display:grid;gap:12px}
+.main-image{
+  position:relative;height:420px;border-radius:22px;overflow:hidden;background:#0b0b0b;
+  border:1px solid rgba(214,175,73,.14);cursor:zoom-in;
+}
+.main-image img{width:100%;height:100%;object-fit:cover;object-position:center}
+.thumb-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.thumb{
+  height:90px;border-radius:16px;overflow:hidden;border:1px solid rgba(214,175,73,.14);
+  background:#0b0b0b;cursor:pointer;opacity:.78;transition:opacity .2s ease, transform .2s ease, border-color .2s ease;
+}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb:hover,.thumb.active{opacity:1;transform:translateY(-1px);border-color:rgba(214,175,73,.3)}
+.lightbox{
+  position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;
+  padding:30px;z-index:200;
+}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(1100px,95vw);max-height:90vh;object-fit:contain;border-radius:14px}
+.lightbox-close{position:absolute;top:18px;right:18px}
+@media (max-width:720px){
+  .main-image{height:320px}
+  .thumb-row{grid-template-columns:repeat(3,1fr)}
+  .thumb{height:76px}
+}
 </style>
 </head>
 <body>
@@ -311,10 +337,59 @@ footer{
 <main>
 <section class="page-hero"><div class="wrap page-intro"><div class="eyebrow">Inventory</div><h1>Current available watches</h1><p>Direct pricing, premium presentation, and simple inquiry options for each available piece.</p></div></section>
 <section><div class="wrap hero-media" style="margin-bottom:22px"><div class="panel"><div class="eyebrow">Available now</div><h2>Curated inventory ready for inquiry</h2><p>Each listing is presented with clear condition notes, pricing, and direct inquiry options.</p></div><div class="hero-visual"><div class="image-card"><img src="hublot.jpg" alt="Hublot watch"></div><div class="image-card"><img src="omega-top-right.jpg" alt="Omega watch"></div></div></div></section>
-<section><div class="wrap watch-grid align-top">
-<div class="watch-card" id="hublot-meca10"><div class="photo"><img src="available-hublot-1.jpg" alt="Hublot Big Bang Meca-10 King Gold 45MM"></div><div class="info"><div class="info-top"><div class="tag">Available</div><h3>Hublot Big Bang Meca-10 King Gold 45MM</h3><div class="meta">Ref: 414.OI.1123.RX<br>Condition: Perfect condition<br>Includes: Original box</div></div><div class="price">$24,900</div><div class="card-actions"><a class="btn" href="contact.html">Inquire</a></div></div></div>
-<div class="watch-card" id="hublot-spirit"><div class="photo"><img src="available-hublot-spirit.jpg" alt="Hublot Spirit of Big Bang Moonphase"></div><div class="info"><div class="info-top"><div class="tag">Available</div><h3>Hublot Spirit of Big Bang Moonphase</h3><div class="meta">Ref: 647.NX.1137.RX<br>Size: 42 mm<br>Includes: Card &amp; box</div></div><div class="price">$11,800</div><div class="card-actions"><a class="btn" href="contact.html">Inquire</a></div></div></div>
-</div></section>
+
+<section>
+  <div class="wrap watch-grid align-top">
+    <div class="watch-card" id="hublot-meca10">
+      <div class="product-gallery">
+        <div class="main-image">
+          <img id="meca10-main" src="available-hublot-1.jpg" alt="Hublot Big Bang Meca-10 King Gold 45MM">
+        </div>
+        <div class="thumb-row">
+          <div class="thumb active" data-target="meca10-main" data-full="available-hublot-1.jpg"><img src="available-hublot-1.jpg" alt=""></div>
+          <div class="thumb" data-target="meca10-main" data-full="available-hublot-2.jpg"><img src="available-hublot-2.jpg" alt=""></div>
+          <div class="thumb" data-target="meca10-main" data-full="available-hublot-3.jpg"><img src="available-hublot-3.jpg" alt=""></div>
+          <div class="thumb" data-target="meca10-main" data-full="available-hublot-4.jpg"><img src="available-hublot-4.jpg" alt=""></div>
+          <div class="thumb" data-target="meca10-main" data-full="available-hublot-5.jpg"><img src="available-hublot-5.jpg" alt=""></div>
+        </div>
+      </div>
+      <div class="info">
+        <div class="info-top">
+          <div class="tag">Available</div>
+          <h3>Hublot Big Bang Meca-10 King Gold 45MM</h3>
+          <div class="meta">Ref: 414.OI.1123.RX<br>Condition: Perfect condition<br>Includes: Original box</div>
+        </div>
+        <div class="price">$24,900</div>
+        <div class="card-actions"><a class="btn" href="contact.html">Inquire</a></div>
+      </div>
+    </div>
+
+    <div class="watch-card" id="hublot-spirit">
+      <div class="product-gallery">
+        <div class="main-image">
+          <img id="spirit-main" src="available-hublot-spirit.jpg" alt="Hublot Spirit of Big Bang Moonphase">
+        </div>
+        <div class="thumb-row">
+          <div class="thumb active" data-target="spirit-main" data-full="available-hublot-spirit.jpg"><img src="available-hublot-spirit.jpg" alt=""></div>
+        </div>
+      </div>
+      <div class="info">
+        <div class="info-top">
+          <div class="tag">Available</div>
+          <h3>Hublot Spirit of Big Bang Moonphase</h3>
+          <div class="meta">Ref: 647.NX.1137.RX<br>Size: 42 mm<br>Includes: Card &amp; box</div>
+        </div>
+        <div class="price">$11,800</div>
+        <div class="card-actions"><a class="btn" href="contact.html">Inquire</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox">
+  <button class="btn-outline lightbox-close" type="button" id="lightboxClose">Close</button>
+  <img id="lightboxImg" src="" alt="Expanded watch image">
+</div>
+
 </main>
 
 <footer>
@@ -363,5 +438,46 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const thumbs = document.querySelectorAll('.thumb');
+  thumbs.forEach((thumb) => {
+    const targetId = thumb.dataset.target;
+    const full = thumb.dataset.full;
+    const test = new Image();
+    test.onerror = () => thumb.style.display = 'none';
+    test.src = full;
+    thumb.addEventListener('click', () => {
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      target.src = full;
+      const row = thumb.parentElement;
+      row.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      const main = thumb.closest('.product-gallery').querySelector('.main-image');
+      if (main) main.dataset.full = full;
+    });
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.main-image').forEach((main) => {
+    const img = main.querySelector('img');
+    main.dataset.full = img ? img.src : '';
+    main.addEventListener('click', () => {
+      const src = main.dataset.full || (img ? img.src : '');
+      if (!src) return;
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+    });
+  });
+
+  if (lightboxClose) lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+  if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+});
+</script>
 </body>
 </html>
