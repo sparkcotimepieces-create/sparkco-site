@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spark &amp; Co. Timepieces</title>
-  <meta name="description" content="Sell your luxury watch with confidence. Spark & Co. Timepieces delivers a premium, private, and professional selling experience for luxury timepieces.">
+  <meta name="description" content="Spark & Co. Timepieces is a luxury watch buying and selling website featuring curated inventory, sold watches, and private acquisition services.">
   <style>
     :root{
       --text:#f5f0e6;
@@ -43,14 +43,15 @@
     .nav-links{display:flex;align-items:center;gap:18px;color:var(--muted);font-size:14px}
     .eyebrow{color:var(--gold-light);text-transform:uppercase;letter-spacing:.22em;font-size:13px;font-weight:700;margin-bottom:18px}
     h1,h2,h3{margin:0;font-family:Georgia, "Times New Roman", serif;letter-spacing:-.03em}
-    h1{font-size:clamp(48px,7.4vw,96px);line-height:.95;max-width:760px}
+    h1{font-size:clamp(48px,7.2vw,92px);line-height:.95;max-width:900px}
     h2{font-size:clamp(34px,5vw,64px);line-height:.98}
     h3{font-size:clamp(24px,3vw,34px);line-height:1.05}
     p{margin:0;color:var(--muted);font-size:20px;line-height:1.8}
-    .hero{padding:68px 0 30px}
-    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
-    .lead{margin-top:22px;font-size:clamp(20px,2.2vw,29px);line-height:1.55;max-width:720px}
-    .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:32px}
+    section{padding:28px 0}
+    .hero{padding:84px 0 36px}
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:34px;align-items:center}
+    .lead{margin-top:22px;font-size:clamp(20px,2.1vw,28px);line-height:1.55;max-width:760px}
+    .hero-actions,.split-actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:32px}
     .hero-note{margin-top:20px;color:var(--gold-light);font-size:15px;font-weight:700}
     .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
     .stat{border:1px solid var(--line);border-radius:24px;padding:22px;background:rgba(255,255,255,.02);transform:translateY(0);transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease}
@@ -64,66 +65,42 @@
     .btn{color:#111;background:linear-gradient(135deg,var(--gold),var(--gold-light));box-shadow:0 14px 28px rgba(217,178,76,.18);border:none;cursor:pointer}
     .btn-outline,.pill{border:1px solid var(--line);color:var(--gold-light);background:rgba(255,255,255,.02)}
     .btn:hover,.btn-outline:hover,.pill:hover{transform:translateY(-2px)}
-    .panel,.hero-card{
+    .panel{
       position:relative;overflow:hidden;border-radius:36px;border:1px solid rgba(255,255,255,.06);
       background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));box-shadow:var(--shadow)
     }
-    .panel::before,.hero-card::before{
+    .panel::before{
       content:"";position:absolute;inset:0;pointer-events:none;
       background:linear-gradient(135deg, rgba(217,178,76,.08), transparent 34%, transparent 70%, rgba(217,178,76,.04)),
                  linear-gradient(180deg, rgba(255,255,255,.02), transparent 20%)
     }
-    .hero-card{padding:24px}
-    .hero-images{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-    .hero-image{
-      position:relative;
-      overflow:hidden;
-      height:280px;
-      border-radius:26px;
-      background:#0b0b0b;
-      border:1px solid rgba(217,178,76,.14);
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
-      transform:translateY(0) scale(1);
-      transition:transform .6s ease, box-shadow .6s ease, border-color .6s ease;
-    }
-    .hero-image:hover,.gallery-card:hover,.watch-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 40px rgba(0,0,0,.35);border-color:rgba(217,178,76,.28)}
-    .hero-image img,.gallery-card img,.watch-card img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 8s ease}
-    .hero-image:hover img,.gallery-card:hover img,.watch-card:hover img{transform:scale(1.05)}
-    .hero-image.rolex img{object-fit:contain;background:#0b0b0b;padding:12px}
-    section{padding:28px 0}
     .panel{padding:36px}
+    .hero-panel{
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .hero-list,.list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:16px}
+    .hero-list li,.list li{display:flex;gap:14px;align-items:flex-start;color:var(--muted);font-size:18px;line-height:1.6}
+    .dot,.num{
+      width:38px;height:38px;flex:0 0 auto;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);
+      background:rgba(217,178,76,.06);color:var(--gold-light);font-weight:700
+    }
     .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:28px}
     .gallery-card{
       position:relative;overflow:hidden;border-radius:26px;min-height:320px;border:1px solid rgba(217,178,76,.14);
       background:#0b0b0b;transition:transform .55s ease, box-shadow .55s ease, border-color .55s ease
     }
+    .gallery-card:hover,.watch-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 40px rgba(0,0,0,.35);border-color:rgba(217,178,76,.28)}
+    .gallery-card img,.watch-card img{width:100%;height:100%;object-fit:cover;transition:transform 8s ease}
+    .gallery-card:hover img,.watch-card:hover img{transform:scale(1.05)}
     .gallery-caption{position:absolute;left:22px;right:22px;bottom:18px;z-index:2}
     .gallery-caption strong{display:block;margin-bottom:8px;color:var(--gold-light);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.18em}
     .gallery-caption span{color:#f0e7d7;font-size:16px;line-height:1.55}
-    .contact-grid,.grid-2{display:grid;gap:28px}
+    .watch-grid,.grid-2,.contact-grid{display:grid;gap:28px}
+    .watch-grid,.grid-2{grid-template-columns:1fr 1fr}
     .contact-grid{grid-template-columns:1fr .96fr;align-items:start}
-    .grid-2{grid-template-columns:1fr 1fr}
-    form{display:grid;gap:16px}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    input,select,textarea{
-      width:100%;padding:18px 20px;border-radius:22px;border:1px solid rgba(255,255,255,.08);background:#0a0a0a;color:var(--text);
-      font-size:17px;outline:none;transition:border-color .25s ease, box-shadow .25s ease, transform .25s ease
-    }
-    input::placeholder,textarea::placeholder,select{color:#b9ad97}
-    textarea{min-height:180px;resize:vertical}
-    input:focus,select:focus,textarea:focus{border-color:rgba(217,178,76,.55);box-shadow:0 0 0 4px rgba(217,178,76,.08);transform:translateY(-1px)}
-    .submit-note{color:#b8aa90;font-size:14px;line-height:1.7}
-    .list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:16px}
-    .list li{display:flex;gap:14px;align-items:flex-start;color:var(--muted);font-size:18px;line-height:1.6}
-    .dot,.num{
-      width:38px;height:38px;flex:0 0 auto;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);
-      background:rgba(217,178,76,.06);color:var(--gold-light);font-weight:700
-    }
-    .watch-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
     .watch-card{
       border:1px solid rgba(217,178,76,.14);border-radius:26px;overflow:hidden;background:rgba(255,255,255,.02);
       transition:transform .45s ease, border-color .45s ease, box-shadow .45s ease
@@ -135,6 +112,21 @@
       background:rgba(217,178,76,.10);border:1px solid rgba(217,178,76,.16);color:var(--gold-light);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px
     }
     .meta{margin-top:10px;color:var(--muted);font-size:16px;line-height:1.7}
+    .dual-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+    .mini-panel{
+      border:1px solid rgba(217,178,76,.14);border-radius:28px;padding:28px;background:rgba(255,255,255,.02)
+    }
+    .mini-panel p{font-size:18px}
+    form{display:grid;gap:16px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    input,select,textarea{
+      width:100%;padding:18px 20px;border-radius:22px;border:1px solid rgba(255,255,255,.08);background:#0a0a0a;color:var(--text);
+      font-size:17px;outline:none;transition:border-color .25s ease, box-shadow .25s ease, transform .25s ease
+    }
+    input::placeholder,textarea::placeholder,select{color:#b9ad97}
+    textarea{min-height:180px;resize:vertical}
+    input:focus,select:focus,textarea:focus{border-color:rgba(217,178,76,.55);box-shadow:0 0 0 4px rgba(217,178,76,.08);transform:translateY(-1px)}
+    .submit-note{color:#b8aa90;font-size:14px;line-height:1.7}
     footer{margin-top:30px;padding:42px 0 60px;border-top:1px solid rgba(255,255,255,.05);color:#b8ab93}
     .footer-row{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;font-size:15px}
     .footer-links{display:flex;gap:16px;flex-wrap:wrap}
@@ -162,18 +154,17 @@
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     @keyframes slideUp{to{opacity:1;transform:translateY(0)}}
     @media (max-width:1080px){
-      .hero-grid,.gallery,.contact-grid,.grid-2,.watch-grid{grid-template-columns:1fr}
-      .gallery-card,.watch-card .photo{min-height:320px;height:320px}
+      .hero-grid,.gallery,.contact-grid,.grid-2,.watch-grid,.dual-cards{grid-template-columns:1fr}
       .stats{grid-template-columns:1fr}
+      .gallery-card,.watch-card .photo{min-height:320px;height:320px}
     }
     @media (max-width:720px){
       .wrap{padding:0 16px}
       .nav-links{display:none}
-      .panel,.hero-card,.success-card{padding:22px}
-      .form-grid,.hero-images{grid-template-columns:1fr}
+      .panel,.success-card{padding:22px}
+      .form-grid{grid-template-columns:1fr}
       .btn,.btn-outline,.pill{width:100%}
       .hero{padding-top:36px}
-      .hero-image{height:240px}
     }
   </style>
 </head>
@@ -189,8 +180,8 @@
         <a href="#collection">Collection</a>
         <a href="#available">Available</a>
         <a href="#sold">Sold Watches</a>
-        <a href="#benefits">Why Sell to Us</a>
-        <a href="#offer">Request Offer</a>
+        <a href="#benefits">Services</a>
+        <a href="#offer">Sell Yours</a>
         <a class="btn-outline" href="sms:7038890333">Text Us</a>
       </div>
     </div>
@@ -200,31 +191,41 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="reveal">
-          <div class="eyebrow">Private luxury watch buyer</div>
-          <h1>Sell Your Luxury Watch Through a Truly Premium Experience</h1>
+          <div class="eyebrow">Luxury watch buying &amp; selling</div>
+          <h1>Buy, Sell, and Source Luxury Watches Through One Premium Platform</h1>
           <p class="lead">
-            Spark &amp; Co. Timepieces acquires exceptional watches from private sellers through a discreet,
-            professional, and design-forward process built for confidence.
+            Spark &amp; Co. Timepieces is more than a private watch buyer. We offer curated inventory for sale,
+            source exceptional watches, and acquire premium timepieces from private sellers through a discreet,
+            professional process.
           </p>
           <div class="hero-actions">
-            <a class="btn" href="#offer">Get My Private Offer</a>
-            <a class="btn-outline" href="sms:7038890333">Text Us Directly</a>
+            <a class="btn" href="#available">Shop Inventory</a>
+            <a class="btn-outline" href="#offer">Sell Your Watch</a>
           </div>
-          <div class="hero-note">Competitive offers. Private communication. Typical response within 10–15 minutes.</div>
+          <div class="hero-note">Available inventory. Private acquisitions. Direct inquiries. Luxury presentation.</div>
 
           <div class="stats">
-            <div class="stat reveal delay-1"><b>Private</b><span>Discreet seller experience</span></div>
-            <div class="stat reveal delay-2"><b>Fast</b><span>Responsive evaluation process</span></div>
-            <div class="stat reveal delay-3"><b>Direct</b><span>No hidden fees or middlemen</span></div>
+            <div class="stat reveal delay-1"><b>Buy</b><span>Curated inventory</span></div>
+            <div class="stat reveal delay-2"><b>Sell</b><span>Private offers</span></div>
+            <div class="stat reveal delay-3"><b>Source</b><span>Luxury timepieces</span></div>
           </div>
         </div>
 
-        <div class="hero-card reveal delay-1">
-          <div class="hero-images">
-            <div class="hero-image rolex"><img src="rolex.jpg" alt="Luxury Rolex watch"></div>
-            <div class="hero-image"><img src="ap.jpg" alt="Luxury Audemars Piguet watch"></div>
-            <div class="hero-image"><img src="hublot.jpg" alt="Luxury Hublot watch"></div>
-            <div class="hero-image"><img src="omega-top-right.jpg" alt="Luxury Omega watch"></div>
+        <div class="panel hero-panel reveal delay-1">
+          <div class="eyebrow">What we offer</div>
+          <h2>A more complete luxury watch experience</h2>
+          <p>
+            Explore watches we currently have available, review pieces we have sold, and contact us directly if you want
+            to sell your watch or source something specific.
+          </p>
+          <ul class="hero-list">
+            <li><span class="dot">✓</span><span>Browse available watches with direct pricing and inquiries</span></li>
+            <li><span class="dot">✓</span><span>See sold pieces that reflect our brand taste and transaction history</span></li>
+            <li><span class="dot">✓</span><span>Request a private offer if you want to sell your own timepiece</span></li>
+          </ul>
+          <div class="split-actions">
+            <a class="btn" href="inventory.html">View Inventory</a>
+            <a class="btn-outline" href="sold.html">View Sold Watches</a>
           </div>
         </div>
       </div>
@@ -235,8 +236,7 @@
         <div class="eyebrow">Curated visual identity</div>
         <h2>A premium presentation for premium timepieces</h2>
         <p>
-          First impressions matter. A luxury acquisition brand should feel elevated,
-          polished, and trustworthy from the moment a seller lands on the page.
+          First impressions matter. A luxury watch platform should feel elevated, polished, and trustworthy whether a client is shopping inventory or selling a watch.
         </p>
 
         <div class="gallery">
@@ -244,7 +244,7 @@
             <img src="rolex.jpg" alt="Rolex style luxury watch">
             <div class="gallery-caption">
               <strong>Rolex-Inspired Presence</strong>
-              <span>A rich, high-end visual tone built for premium sellers.</span>
+              <span>A rich, high-end visual tone built for premium buyers and sellers.</span>
             </div>
           </div>
 
@@ -324,6 +324,44 @@
             </div>
           </div>
         </div>
+
+        <div style="margin-top:18px;">
+          <a class="btn-outline" href="inventory.html">See Full Inventory</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="wrap panel reveal">
+        <div class="eyebrow">Services</div>
+        <h2>Built for both buyers and sellers</h2>
+        <p>
+          Whether you are shopping for your next piece or looking to sell one, the experience should feel direct, discreet, and premium.
+        </p>
+
+        <div class="dual-cards">
+          <div class="mini-panel">
+            <div class="eyebrow">For buyers</div>
+            <h3>Shop available watches</h3>
+            <p>
+              Review current listings, see pricing directly, and inquire on the pieces that match your collection goals.
+            </p>
+            <div class="split-actions">
+              <a class="btn" href="inventory.html">Browse Watches</a>
+            </div>
+          </div>
+
+          <div class="mini-panel">
+            <div class="eyebrow">For sellers</div>
+            <h3>Request a private offer</h3>
+            <p>
+              Submit your watch details for review and receive a direct response from Spark &amp; Co. Timepieces.
+            </p>
+            <div class="split-actions">
+              <a class="btn-outline" href="#offer">Sell Your Watch</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -373,14 +411,34 @@
       </div>
     </section>
 
+    <section id="about">
+      <div class="wrap grid-2">
+        <div class="panel reveal">
+          <div class="eyebrow">About Spark &amp; Co. Timepieces</div>
+          <h2>A trusted luxury watch website</h2>
+          <p>
+            Spark &amp; Co. Timepieces is positioned as a modern luxury watch business that supports inventory sales, sourcing, and private acquisitions with a cleaner and more elevated client experience.
+          </p>
+        </div>
+
+        <div class="panel reveal delay-1">
+          <div class="eyebrow">Why clients choose us</div>
+          <ul class="list">
+            <li><span class="dot">✓</span><span>Luxury-style presentation for both available and sold watches</span></li>
+            <li><span class="dot">✓</span><span>Clear inquiries for buyers and straightforward private offers for sellers</span></li>
+            <li><span class="dot">✓</span><span>A cleaner brand presence designed to build trust and perceived value</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section>
       <div class="wrap contact-grid">
         <div class="panel reveal">
           <div class="eyebrow">Direct contact</div>
-          <h2>Prefer a direct conversation?</h2>
+          <h2>Need help buying, selling, or sourcing?</h2>
           <p>
-            Reach out by text or email for a faster, more personal response. Every inquiry is handled
-            with discretion and a focus on making the selling process smooth from first contact.
+            Reach out by text or email for a faster, more personal response. Whether you are inquiring on inventory or selling your watch, we keep the process direct and professional.
           </p>
           <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:26px;">
             <a class="btn" href="sms:7038890333">Text Us</a>
@@ -389,7 +447,7 @@
         </div>
 
         <div class="panel reveal delay-1" id="offer">
-          <div class="eyebrow">Request your private offer</div>
+          <div class="eyebrow">Sell your watch</div>
           <form id="offerForm" action="https://formspree.io/f/mpqooaga" method="POST">
             <input type="hidden" name="_subject" value="New watch inquiry from Spark &amp; Co. website">
             <input type="hidden" name="_captcha" value="false">
@@ -417,90 +475,26 @@
 
             <textarea name="details" placeholder="Tell us about your watch, included accessories, condition, and asking price."></textarea>
 
-            <button class="btn" type="submit">Get My Private Offer</button>
+            <button class="btn" type="submit">Request My Private Offer</button>
 
             <div class="submit-note">
-              By submitting, you agree to be contacted by Spark &amp; Co. Timepieces regarding your inquiry.
+              By submitting, you agree to be contacted by Spark &amp; Co. Timepieces regarding your watch inquiry.
             </div>
           </form>
         </div>
       </div>
     </section>
 
-    <section id="about">
-      <div class="wrap grid-2">
-        <div class="panel reveal">
-          <div class="eyebrow">About Spark &amp; Co. Timepieces</div>
-          <h2>A trusted buyer for luxury timepieces</h2>
-          <p>
-            We work with private sellers who value professionalism, presentation, and a fair market-based approach.
-            Our process is built to feel straightforward, elevated, and secure.
-          </p>
-        </div>
-
-        <div class="panel reveal delay-1">
-          <div class="eyebrow">Why clients choose us</div>
-          <ul class="list">
-            <li><span class="dot">✓</span><span>Private communication from first inquiry to final payment</span></li>
-            <li><span class="dot">✓</span><span>Clear offers based on brand, condition, accessories, and market demand</span></li>
-            <li><span class="dot">✓</span><span>A polished experience designed for individual sellers and curated collections</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="benefits">
-      <div class="wrap panel reveal">
-        <div class="eyebrow">Why sell to us</div>
-        <h2>Luxury watch owners expect a higher standard</h2>
-        <p>
-          Selling a premium watch should feel as refined as acquiring one. We focus on speed, trust,
-          and presentation so the process feels confident at every step.
-        </p>
-        <ul class="list">
-          <li><span class="num">01</span><span><strong>Competitive market-based offers</strong><br>We evaluate demand, condition, and overall presentation to deliver strong, fair offers.</span></li>
-          <li><span class="num">02</span><span><strong>Fast and efficient process</strong><br>No unnecessary delays. We aim to review submissions promptly and communicate clearly.</span></li>
-          <li><span class="num">03</span><span><strong>Private and discreet transactions</strong><br>Your information and transaction details are handled with professionalism.</span></li>
-          <li><span class="num">04</span><span><strong>No hidden fees</strong><br>What we offer is what you receive.</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap grid-2">
-        <div class="panel reveal">
-          <div class="eyebrow">A better way to sell</div>
-          <h2>An experience built around confidence</h2>
-          <p>
-            From the first message to the final offer, our goal is to make every interaction feel refined,
-            direct, and trustworthy.
-          </p>
-        </div>
-
-        <div class="panel reveal delay-1">
-          <div class="eyebrow">Brands we consider</div>
-          <ul class="list">
-            <li><span class="dot">✓</span><span>Rolex</span></li>
-            <li><span class="dot">✓</span><span>Omega</span></li>
-            <li><span class="dot">✓</span><span>Cartier</span></li>
-            <li><span class="dot">✓</span><span>Audemars Piguet</span></li>
-            <li><span class="dot">✓</span><span>Panerai</span></li>
-            <li><span class="dot">✓</span><span>Hublot</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <section>
       <div class="wrap panel reveal">
-        <div class="eyebrow">Ready to sell?</div>
-        <h2>Request your private offer today</h2>
+        <div class="eyebrow">Ready to move forward?</div>
+        <h2>Browse inventory or sell your watch today</h2>
         <p>
-          Submit your watch details for a prompt review, or contact us directly for a faster conversation.
+          Shop what is currently available, review sold pieces, or submit your own watch for a private offer.
         </p>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:32px;">
-          <a class="btn" href="#offer">Get My Private Offer</a>
-          <a class="btn-outline" href="sms:7038890333">Text Us Directly</a>
+        <div class="split-actions">
+          <a class="btn" href="inventory.html">Browse Inventory</a>
+          <a class="btn-outline" href="#offer">Sell Your Watch</a>
         </div>
       </div>
     </section>
