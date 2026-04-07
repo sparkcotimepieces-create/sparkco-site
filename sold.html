@@ -11,8 +11,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" href="favicon-192.png">
-<title>Sold Watches | Spark &amp; Co. Timepieces</title>
-<meta name="description" content="Sold watches from Spark &amp; Co. Timepieces.">
+
+<title>Sold Luxury Watches | Spark &amp; Co. Timepieces</title>
+<meta name="description" content="View sold luxury watches handled by Spark & Co. Timepieces.">
 <style>
 :root{
   --bg:#070707;
@@ -159,7 +160,9 @@ p{
 .stat,.mini-panel,.watch-card{
   border:1px solid var(--line); border-radius:22px; background:rgba(255,255,255,.018);
 }
-.stat{padding:18px; transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease}
+.stat{
+  padding:18px; transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
 .stat:hover,.mini-panel:hover,.watch-card:hover,.gallery-card:hover{
   transform:translateY(-4px); border-color:rgba(214,175,73,.28); box-shadow:0 16px 34px rgba(0,0,0,.28);
 }
@@ -191,6 +194,7 @@ p{
   display:flex; flex-direction:column; height:100%;
 }
 .watch-card .photo{height:320px; background:#0b0b0b; overflow:hidden}
+.watch-card .photo img{object-fit:cover; object-position:center}
 .watch-card .info{
   padding:20px; display:flex; flex-direction:column; gap:10px; flex:1;
 }
@@ -230,6 +234,31 @@ input,select,textarea{
 input::placeholder,textarea::placeholder,select{color:#b9ad97}
 textarea{min-height:170px; resize:vertical}
 .submit-note{color:#b8aa90; font-size:13px; line-height:1.65}
+.product-gallery{display:grid;gap:12px}
+.main-image{
+  position:relative;height:420px;border-radius:22px;overflow:hidden;background:#0b0b0b;
+  border:1px solid rgba(214,175,73,.14);cursor:zoom-in;
+}
+.main-image img{width:100%;height:100%;object-fit:cover;object-position:center}
+.thumb-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.thumb{
+  height:90px;border-radius:16px;overflow:hidden;border:1px solid rgba(214,175,73,.14);
+  background:#0b0b0b;cursor:pointer;opacity:.78;transition:opacity .2s ease, transform .2s ease, border-color .2s ease;
+}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb:hover,.thumb.active{opacity:1;transform:translateY(-1px);border-color:rgba(214,175,73,.3)}
+.lightbox{
+  position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;
+  padding:30px;z-index:200;
+}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(1100px,95vw);max-height:90vh;object-fit:contain;border-radius:14px}
+.lightbox-close{position:absolute;top:18px;right:18px}
+.seo-block{
+  margin-top:20px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
 footer{
   margin-top:26px; padding:36px 0 56px;
   border-top:1px solid rgba(255,255,255,.05); color:#b8ab93;
@@ -271,6 +300,9 @@ footer{
   .form-grid{grid-template-columns:1fr}
   .btn,.btn-outline,.pill{width:100%}
   .hero{padding-top:38px}
+  .main-image{height:320px}
+  .thumb-row{grid-template-columns:repeat(3,1fr)}
+  .thumb{height:76px}
 }
 </style>
 </head>
@@ -309,7 +341,6 @@ footer{
     </div>
   </div>
 </div>
-</div>
 
 <main>
 <section class="page-hero"><div class="wrap page-intro"><div class="eyebrow">Sold Watches</div><h1>Recently handled pieces</h1><p>Examples of watches we have recently sold and the level of pieces we work with.</p></div></section>
@@ -333,19 +364,14 @@ footer{
 document.addEventListener('DOMContentLoaded', () => {
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-});
-</script>
 
-
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('menuToggle');
   const menu = document.getElementById('mobileMenu');
   if (toggle && menu) {
@@ -363,8 +389,80 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  const thumbs = document.querySelectorAll('.thumb');
+  thumbs.forEach((thumb) => {
+    const targetId = thumb.dataset.target;
+    const full = thumb.dataset.full;
+    if (!full) return;
+    const test = new Image();
+    test.onerror = () => thumb.style.display = 'none';
+    test.src = full;
+    thumb.addEventListener('click', () => {
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      target.src = full;
+      const row = thumb.parentElement;
+      row.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      const main = thumb.closest('.product-gallery')?.querySelector('.main-image');
+      if (main) main.dataset.full = full;
+    });
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.main-image').forEach((main) => {
+    const img = main.querySelector('img');
+    main.dataset.full = img ? img.src : '';
+    main.addEventListener('click', () => {
+      const src = main.dataset.full || (img ? img.src : '');
+      if (!src || !lightbox || !lightboxImg) return;
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+    });
+  });
+
+  if (lightboxClose && lightbox) lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+  if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+
+  const form = document.getElementById('offerForm');
+  const overlay = document.getElementById('successOverlay');
+  const closeBtn = document.getElementById('closeSuccess');
+  if (form && overlay && closeBtn) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          form.reset();
+          overlay.classList.add('show');
+        } else {
+          alert('There was a problem submitting your request.');
+        }
+      } catch (err) {
+        alert('There was a problem submitting your request.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+    closeBtn.addEventListener('click', () => overlay.classList.remove('show'));
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('show'); });
+  }
 });
 </script>
+
 
 </body>
 </html>

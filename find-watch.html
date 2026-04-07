@@ -11,9 +11,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" href="favicon-192.png">
-  
-<title>Find a Watch | Spark &amp; Co. Timepieces</title>
-<meta name="description" content="Watch sourcing by Spark &amp; Co. Timepieces.">
+
+<title>Find a Luxury Watch | Spark &amp; Co. Timepieces</title>
+<meta name="description" content="Request help sourcing a luxury watch through Spark & Co. Timepieces.">
 <style>
 :root{
   --bg:#070707;
@@ -160,7 +160,9 @@ p{
 .stat,.mini-panel,.watch-card{
   border:1px solid var(--line); border-radius:22px; background:rgba(255,255,255,.018);
 }
-.stat{padding:18px; transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease}
+.stat{
+  padding:18px; transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
 .stat:hover,.mini-panel:hover,.watch-card:hover,.gallery-card:hover{
   transform:translateY(-4px); border-color:rgba(214,175,73,.28); box-shadow:0 16px 34px rgba(0,0,0,.28);
 }
@@ -192,6 +194,7 @@ p{
   display:flex; flex-direction:column; height:100%;
 }
 .watch-card .photo{height:320px; background:#0b0b0b; overflow:hidden}
+.watch-card .photo img{object-fit:cover; object-position:center}
 .watch-card .info{
   padding:20px; display:flex; flex-direction:column; gap:10px; flex:1;
 }
@@ -231,6 +234,31 @@ input,select,textarea{
 input::placeholder,textarea::placeholder,select{color:#b9ad97}
 textarea{min-height:170px; resize:vertical}
 .submit-note{color:#b8aa90; font-size:13px; line-height:1.65}
+.product-gallery{display:grid;gap:12px}
+.main-image{
+  position:relative;height:420px;border-radius:22px;overflow:hidden;background:#0b0b0b;
+  border:1px solid rgba(214,175,73,.14);cursor:zoom-in;
+}
+.main-image img{width:100%;height:100%;object-fit:cover;object-position:center}
+.thumb-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.thumb{
+  height:90px;border-radius:16px;overflow:hidden;border:1px solid rgba(214,175,73,.14);
+  background:#0b0b0b;cursor:pointer;opacity:.78;transition:opacity .2s ease, transform .2s ease, border-color .2s ease;
+}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb:hover,.thumb.active{opacity:1;transform:translateY(-1px);border-color:rgba(214,175,73,.3)}
+.lightbox{
+  position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;
+  padding:30px;z-index:200;
+}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(1100px,95vw);max-height:90vh;object-fit:contain;border-radius:14px}
+.lightbox-close{position:absolute;top:18px;right:18px}
+.seo-block{
+  margin-top:20px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
 footer{
   margin-top:26px; padding:36px 0 56px;
   border-top:1px solid rgba(255,255,255,.05); color:#b8ab93;
@@ -272,6 +300,9 @@ footer{
   .form-grid{grid-template-columns:1fr}
   .btn,.btn-outline,.pill{width:100%}
   .hero{padding-top:38px}
+  .main-image{height:320px}
+  .thumb-row{grid-template-columns:repeat(3,1fr)}
+  .thumb{height:76px}
 }
 </style>
 </head>
@@ -310,82 +341,24 @@ footer{
     </div>
   </div>
 </div>
-</div>
-
 
 <main>
-<section class="page-hero">
-  <div class="wrap page-intro">
-    <div class="eyebrow">Find a Watch</div>
-    <h1>Tell us what watch you want</h1>
-    <p>If the right piece is not currently in inventory, we can help source it through our network of collectors, dealers, and trusted contacts.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap hero-media" style="margin-bottom:22px">
-    <div class="hero-visual">
-      <div class="image-card"><img src="omega-top-right.jpg" alt="Omega watch"></div>
-      <div class="image-card"><img src="rolex.jpg" alt="Rolex watch"></div>
-    </div>
-    <div class="panel">
-      <div class="eyebrow">How it works</div>
-      <h2>A more direct sourcing experience</h2>
-      <p>Share the brand, reference, budget, and condition preferences you have in mind. We will review your request and let you know what may be possible to source.</p>
-      <ul class="list">
-        <li><span class="dot">✓</span><span>Reference-specific search support</span></li>
-        <li><span class="dot">✓</span><span>Premium brand focus</span></li>
-        <li><span class="dot">✓</span><span>Clear communication throughout the process</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="panel">
-      <div class="eyebrow">Watch request</div>
-      <form id="offerForm" action="https://formspree.io/f/mpqooaga" method="POST">
-        <input type="hidden" name="_subject" value="New find-a-watch request from Spark &amp; Co. website">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="request_type" value="Find a Watch Request">
-
-        <div class="form-grid">
-          <input type="text" name="full_name" placeholder="Full name" required>
-          <input type="email" name="email" placeholder="Email address" required>
-        </div>
-
-        <div class="form-grid">
-          <input type="text" name="phone" placeholder="Phone number">
-          <input type="text" name="brand_model" placeholder="Brand / Model wanted" required>
-        </div>
-
-        <div class="form-grid">
-          <input type="text" name="reference_number" placeholder="Reference number (if known)">
-          <input type="text" name="budget" placeholder="Budget range">
-        </div>
-
-        <div class="form-grid">
-          <select name="condition_preference" required>
-            <option value="" selected disabled>Condition preference</option>
-            <option>New / Unworn</option>
-            <option>Excellent</option>
-            <option>Very Good</option>
-            <option>Open to options</option>
-          </select>
-          <input type="text" name="box_papers" placeholder="Box / Papers preference">
-        </div>
-
-        <textarea name="details" placeholder="Tell us the exact watch you want, preferred size, dial, metal, year, condition, box/papers, and any must-have details."></textarea>
-
-        <button class="btn" type="submit">Submit Watch Request</button>
-        <div class="submit-note">By submitting, you agree to be contacted by Spark &amp; Co. Timepieces regarding your sourcing inquiry.</div>
-      </form>
-    </div>
-  </div>
-</section>
+<section class="page-hero"><div class="wrap page-intro"><div class="eyebrow">Find a Watch</div><h1>Tell us what watch you want</h1><p>If the right piece is not currently in inventory, we can help source it through our network of collectors, dealers, and trusted contacts.</p></div></section>
+<section><div class="wrap hero-media" style="margin-bottom:22px"><div class="hero-visual"><div class="image-card"><img src="omega-top-right.jpg" alt="Omega watch"></div><div class="image-card"><img src="rolex.jpg" alt="Rolex watch"></div></div><div class="panel"><div class="eyebrow">How it works</div><h2>A more direct sourcing experience</h2><p>Share the brand, reference, budget, and condition preferences you have in mind. We will review your request and let you know what may be possible to source.</p><ul class="list"><li><span class="dot">✓</span><span>Reference-specific search support</span></li><li><span class="dot">✓</span><span>Premium brand focus</span></li><li><span class="dot">✓</span><span>Clear communication throughout the process</span></li></ul></div></div></section>
+<section><div class="wrap"><div class="panel"><div class="eyebrow">Watch request</div>
+<form id="offerForm" action="https://formspree.io/f/mpqooaga" method="POST">
+<input type="hidden" name="_subject" value="New find-a-watch request from Spark &amp; Co. website">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="request_type" value="Find a Watch Request">
+<div class="form-grid"><input type="text" name="full_name" placeholder="Full name" required><input type="email" name="email" placeholder="Email address" required></div>
+<div class="form-grid"><input type="text" name="phone" placeholder="Phone number"><input type="text" name="brand_model" placeholder="Brand / Model wanted" required></div>
+<div class="form-grid"><input type="text" name="reference_number" placeholder="Reference number (if known)"><input type="text" name="budget" placeholder="Budget range"></div>
+<div class="form-grid"><select name="condition_preference" required><option value="" selected disabled>Condition preference</option><option>New / Unworn</option><option>Excellent</option><option>Very Good</option><option>Open to options</option></select><input type="text" name="box_papers" placeholder="Box / Papers preference"></div>
+<textarea name="details" placeholder="Tell us the exact watch you want, preferred size, dial, metal, year, condition, box/papers, and any must-have details."></textarea>
+<button class="btn" type="submit">Submit Watch Request</button>
+<div class="submit-note">By submitting, you agree to be contacted by Spark &amp; Co. Timepieces regarding your sourcing inquiry.</div>
+</form></div></div></section>
 </main>
-
 
 <footer>
   <div class="wrap footer-row">
@@ -400,31 +373,70 @@ footer{
 document.addEventListener('DOMContentLoaded', () => {
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-});
-</script>
 
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('open');
+      const expanded = menu.classList.contains('open');
+      toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      toggle.textContent = expanded ? '✕' : '☰';
+    });
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = '☰';
+      });
+    });
+  }
 
+  const thumbs = document.querySelectorAll('.thumb');
+  thumbs.forEach((thumb) => {
+    const targetId = thumb.dataset.target;
+    const full = thumb.dataset.full;
+    if (!full) return;
+    const test = new Image();
+    test.onerror = () => thumb.style.display = 'none';
+    test.src = full;
+    thumb.addEventListener('click', () => {
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      target.src = full;
+      const row = thumb.parentElement;
+      row.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      const main = thumb.closest('.product-gallery')?.querySelector('.main-image');
+      if (main) main.dataset.full = full;
+    });
+  });
 
-<div class="success-overlay" id="successOverlay">
-  <div class="success-card">
-    <div class="success-icon">✓</div>
-    <div class="eyebrow">Submission received</div>
-    <h3>Thank you for your request.</h3>
-    <p>Your submission has been received successfully. We will review the details and reach out shortly.</p>
-    <div class="card-actions">
-      <a class="btn" href="sms:7038890333">Text Us</a>
-      <button class="btn-outline" type="button" id="closeSuccess">Close</button>
-    </div>
-  </div>
-</div>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.main-image').forEach((main) => {
+    const img = main.querySelector('img');
+    main.dataset.full = img ? img.src : '';
+    main.addEventListener('click', () => {
+      const src = main.dataset.full || (img ? img.src : '');
+      if (!src || !lightbox || !lightboxImg) return;
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+    });
+  });
+
+  if (lightboxClose && lightbox) lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+  if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+
   const form = document.getElementById('offerForm');
   const overlay = document.getElementById('successOverlay');
   const closeBtn = document.getElementById('closeSuccess');
@@ -461,27 +473,18 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('menuToggle');
-  const menu = document.getElementById('mobileMenu');
-  if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      menu.classList.toggle('open');
-      const expanded = menu.classList.contains('open');
-      toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      toggle.textContent = expanded ? '✕' : '☰';
-    });
-    menu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.textContent = '☰';
-      });
-    });
-  }
-});
-</script>
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="success-icon">✓</div>
+    <div class="eyebrow">Submission received</div>
+    <h3>Thank you for your request.</h3>
+    <p>Your submission has been received successfully. We will review the details and reach out shortly.</p>
+    <div class="card-actions">
+      <a class="btn" href="sms:7038890333">Text Us</a>
+      <button class="btn-outline" type="button" id="closeSuccess">Close</button>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
